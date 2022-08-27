@@ -173,7 +173,7 @@
             <!-- https://websparrow.org/web/how-to-create-and-save-text-file-in-javascript -->
             <tr><td align="center"><b>Saisir Les Données à Traiter</b></td></tr>
             <tr>
-                <td align="center"><textarea name="" id="em" cols="50" rows="7"></textarea></td>
+                <td align="center"><input type="file" onchange="loadFile(this.files[0])"></td>
             </tr>
             <tr>
                 <td align="center"><input type="button" onclick="valide()" id="button" value="Convert"></td>
@@ -182,9 +182,14 @@
         </table>
     </div>
     <script>
+      var txt = '';
+      async function loadFile(file) {
+        let text = await file.text();
+        txt = text
+      }
         function valide(){
-            var email = document.getElementById("em").value;
-            let words = email.split('\n');
+            // var email = document.getElementById("em").value;
+            let words = txt.split('\n');
             var d={"domain":[]}
             for(var i=0 ; i<words.length;i++){
                 let x=(words[i]); 
