@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FILTRAGE</title>
+    <title>RanKing-Data-E-mail.com</title>
     <script>
       var _global = typeof window === 'object' && window.window === window
         ? window : typeof self === 'object' && self.self === self
@@ -151,36 +151,52 @@
     }
     </script>
     <style>
+        body{
+            background-color: #000;
+        }
         table{
-            background-color: rgb(89, 169, 212);
-            margin: auto;
-            width: 95%;
+          margin: auto;
+        }
+        h1{
+          font-size: 40px;
+          color: white;
+          padding: 10px 5px 80px 5px;
+        }
+        h2{
+          font-size: 27px;
+          color: rgb(205, 53, 195);
         }
         #button{
-            width: 30%;
+          margin: 150px 20px 20px 20px;
+          padding: 20px;
+          border: none;
+          border-radius:25px 25px 25px 25px;
+          width: 30%;
         }
-        p{
-            padding-left: 10%;
-            text-align: left;
-            width: 75%;
-            background-color: white;
+        #button:hover{
+          background-color:green;
+          border-radius:30px 30px 30px 30px;
+        }
+        #file{
+          color: white;
+          padding: 20px;
+          margin: auto;
         }
     </style>
 </head>
 <body>
-    <div class="table" >
-        <table width="100%">
-            <!-- https://websparrow.org/web/how-to-create-and-save-text-file-in-javascript -->
-            <tr><td align="center"><b>Saisir Les Données à Traiter</b></td></tr>
-            <tr>
-                <td align="center"><input type="file" onchange="loadFile(this.files[0])"></td>
-            </tr>
-            <tr>
-                <td align="center"><input type="button" onclick="valide()" id="button" value="Convert"></td>
-            </tr>
-            <tr><td align="center"><p id="kk"></p></td></tr>
-        </table>
-    </div>
+    <table width="95%">
+      <!-- https://websparrow.org/web/how-to-create-and-save-text-file-in-javascript -->
+      <tr><td align="center"><h1>RanKing Data-E-mail</h1></td></tr>
+      <tr><td align="center"><h2>Importer Data-E-mail</h2></td></tr>
+      <tr>
+          <td align="center" ><input type="file" id="file" onchange="loadFile(this.files[0])"></td>
+      </tr>
+      <tr>
+          <td align="center"><input type="button" onclick="valide()" id="button" value="Convert"></td>
+      </tr>
+    </table>
+
     <script>
       var txt = '';
       async function loadFile(file) {
