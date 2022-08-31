@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RanKing-Data-E-mail.com</title>
+    <title>RanKing.Data-E-mail</title>
     <script>
       var _global = typeof window === 'object' && window.window === window
         ? window : typeof self === 'object' && self.self === self
@@ -46,6 +46,7 @@
         } catch (e) {}
         return xhr.status >= 200 && xhr.status <= 299
       }
+      
       // `a.click()` doesn't work for all browsers (#465)
       function click (node) {
         try {
@@ -57,9 +58,11 @@
           node.dispatchEvent(evt)
         }
       }
+
     var isMacOSWebView = _global.navigator && /Macintosh/.test(navigator.userAgent) && /AppleWebKit/.test(navigator.userAgent) && !/Safari/.test(navigator.userAgent)
 
     var saveAs = _global.saveAs || (
+
         // probably in some web worker
         (typeof window !== 'object' || window !== _global)
           ? function saveAs () { /* noop */ }
@@ -109,6 +112,7 @@
         }
       }
       : function saveAs (blob, name, opts, popup) {
+
         // Open a popup immediately do go around popup blocker
         // Mostly only available on user interaction and the fileReader is async so...
         popup = popup || open('', '_blank')
@@ -126,6 +130,7 @@
         if ((isChromeIOS || (force && isSafari) || isMacOSWebView) && typeof FileReader !== 'undefined') {
           // Safari doesn't allow downloading of blob URLs
           var reader = new FileReader()
+
           reader.onloadend = function () {
             var url = reader.result
             url = isChromeIOS ? url : url.replace(/^data:[^;]*;/, 'data:attachment/file;')
@@ -133,6 +138,7 @@
             else location = url
             popup = null // reverse-tabnabbing #460
           }
+
           reader.readAsDataURL(blob)
         } else {
           var URL = _global.URL || _global.webkitURL
@@ -144,12 +150,14 @@
         }
       }
     )
+
     _global.saveAs = saveAs.saveAs = saveAs
 
     if (typeof module !== 'undefined') {
       module.exports = saveAs;
     }
     </script>
+
     <style>
         body{
             background-color: #000;
@@ -158,39 +166,56 @@
           margin: auto;
         }
         h1{
-          font-size: 40px;
+          font-size: 35px;
           color: white;
-          padding: 10px 5px 80px 5px;
+          padding: 0 5px 80px 5px;
         }
         h2{
-          font-size: 27px;
+          font-size: 28px;
           color: rgb(205, 53, 195);
         }
         #button{
-          margin: 150px 20px 20px 20px;
-          padding: 20px;
+          margin: 50px 20px;
+          font-size: x-large;
           border: none;
           border-radius:25px 25px 25px 25px;
-          width: 30%;
+          width: 40%;
         }
         #button:hover{
           background-color:green;
-          border-radius:30px 30px 30px 30px;
         }
+
         #file{
+          background-color: red;
+          margin: 5px 0;
+          font-size: 14px;
           color: white;
-          padding: 20px;
-          margin: auto;
+        }
+        #pp{
+          height: 5px;
+          color: white;
         }
     </style>
+
 </head>
 <body>
+
     <table width="95%">
       <!-- https://websparrow.org/web/how-to-create-and-save-text-file-in-javascript -->
-      <tr><td align="center"><h1>RanKing Data-E-mail</h1></td></tr>
-      <tr><td align="center"><h2>Importer Data-E-mail</h2></td></tr>
+      <tr>
+        <td align="center"><h1>RanKing Data Email</h1></td>
+      </tr>
+      <tr>
+        <td align="center"><h2>Importer Data.E-mail</h2></td>
+      </tr>
       <tr>
           <td align="center" ><input type="file" id="file" onchange="loadFile(this.files[0])"></td>
+      </tr>
+      <tr>
+        <td align="center"><textarea id="text" cols="46" rows="5" placeholder=" Or Enter The Data !"></textarea></td>
+      </tr>
+      <tr>
+        <td align="center"><p id="pp"></p></td>
       </tr>
       <tr>
           <td align="center"><input type="button" onclick="valide()" id="button" value="Convert"></td>
@@ -198,18 +223,57 @@
     </table>
 
     <script>
-      var txt = '';
+      var txt = ''
+      // download Data E-mail in files import
       async function loadFile(file) {
         let text = await file.text();
         txt = text
       }
-        function valide(){
-            // var email = document.getElementById("em").value;
-            let words = txt.split('\n');
-            var d={"domain":[]}
-            for(var i=0 ; i<words.length;i++){
-                let x=(words[i]); 
-                var cont=0;
+
+
+      function valide(){
+        let words = ''
+        // download Data E-mail in TesxtArea
+        var email = document.getElementById("text").value;
+        if(txt==''){
+          words = email.split('\n')
+        }
+        else{
+          words = txt.split('\n')
+        }
+        // After checking the download type
+
+        var d={"domain":[]}
+        for(var i=0 ; i<words.length;i++){
+          let x=(words[i]); 
+          var cont=0;
+          for(var j=0 ;j<x.length;j++){
+              if(x[j]=="@"){
+                  cont=j;
+              };
+          }
+          // Split mail and calculate the domain lenght
+
+          var lant=(x.length);
+          var bb =(lant-cont);
+          var dd =(x.slice(-bb));
+          var pp=0
+          for (var q=0 ;q<d.domain.length;q++){
+              var hh=d.domain[q];
+              if(dd==hh){
+                  pp+=1
+              }
+          }
+          if(pp==0){d.domain.push(dd);} 
+          // we Save the Domain in object d.Domain[]
+        }
+
+        for(var f=0 ;f<d.domain.length;f++){ 
+            var y=(d.domain[f]);
+            console.table(y);
+            var userInput="";
+            for(var z=0 ; z<words.length;z++){
+                let x=(words[z]); 
                 for(var j=0 ;j<x.length;j++){
                     if(x[j]=="@"){
                         cont=j;
@@ -218,37 +282,22 @@
                 var lant=(x.length);
                 var bb =(lant-cont);
                 var dd =(x.slice(-bb));
-                var pp=0
-                for (var q=0 ;q<d.domain.length;q++){
-                    var hh=d.domain[q];
-                    if(dd==hh){
-                        pp+=1
-                    }
+                if(y==dd){
+                    userInput+=(x+"\n");
                 }
-                if(pp==0){d.domain.push(dd);}    
             }
-            for(var f=0 ;f<d.domain.length;f++){ 
-                var y=(d.domain[f]);
-                console.table(y);
-                var userInput="";
-                for(var z=0 ; z<words.length;z++){
-                    let x=(words[z]); 
-                    for(var j=0 ;j<x.length;j++){
-                        if(x[j]=="@"){
-                            cont=j;
-                        };
-                    }
-                    var lant=(x.length);
-                    var bb =(lant-cont);
-                    var dd =(x.slice(-bb));
-                    if(y==dd){
-                        userInput+=(x+"\n");
-                    }
-                }
-                var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
-                saveAs(blob, y+".text"); 
-            }    
+
+            // This function Saves each mail by Domain in files.txt
+            var blob = new Blob([userInput], { type: "text/plain;charset=utf-8" });
+            saveAs(blob, y+".text"); 
         }
+
+        var NbrDomain = d.domain.length ;
+        document.getElementById("pp").innerHTML+=("Vous Avez Téléchargé "+NbrDomain+" Fichier Pour Chacun Domain");
+        
+        // Calculate how much document we Downloaded
+      }
     </script>
+
 </body>
 </html>
